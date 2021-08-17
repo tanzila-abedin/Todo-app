@@ -18,15 +18,15 @@ export default class Show {
       alert("Fill in a Project Name");     
       return;
     } 
-
-//     if (projectArray.isPresent(projectValue)) {
-//       projectInput.value = "";
-//       alert("choose a different project name");
-//     }
-     //    const newProject = new Project(projectValue);
-        newProject.addProject(projectValue); 
+    if (Project.isPresent(projectValue)) {
+      projectInput.value = "";
+      alert("choose a different project name");
+    } else {
+      const newProject = new Project(projectValue);
+        Project.addProject(newProject); 
         Show.newProjectTemplate(projectValue);
         Show.newTaskForm(projectValue)
+  }
 
   }
 
@@ -36,7 +36,7 @@ export default class Show {
        <span>${title}</span>
        <i class="far fa-trash-alt p-2 delete"></i>
      </li>`;
-     Show.deleteProjectEvent()
+     Show.deleteProjectEvent(title)
   }
 
   static newTaskForm(projectTitle){
@@ -44,7 +44,7 @@ export default class Show {
        taskFormContainer.innerHTML += `
        <div>
            <h4>${projectTitle}</h4>
-           <form action="/action_page.php" class="d-flex justify-content-center align-items-center task-form id="usrform">
+           <form class="d-flex justify-content-center align-items-center task-form" id="usrform">
                  <label for="task-name" class="p-2">Name</label><br>
                  <input type="text" id="task-name" name="task-name" value="" placeholder="name"><br>
 
@@ -61,19 +61,20 @@ export default class Show {
                  <input type="submit" id="task-submit">
                </form> 
        </div>`;
-       Show.taskEvent()
+       const project = Project.findProject(projectTitle)
+       Show.taskEvent(project)
   }
 
-  static taskEvent(){
-     const taskSubmit = document.getElementById('task-submit')
-     taskSubmit.addEventListener("click",
+  static taskEvent(project){
+     const taskSubmit = document.getElementById('usrform')
+     taskSubmit.addEventListener("submit",
      (e) => {e.preventDefault(),
-      Show.addTask()
+      Show.addTask(project)
      }
     ) 
   }
   
-  static addTask(){
+  static addTask(project){
        const taskName = document.getElementById("task-name")   
        const taskNameInput = taskName.value
      //   const description = document.getElementById('description')
@@ -83,14 +84,15 @@ export default class Show {
        const dueDate = document.getElementById("due-date");
        const dueDateinput = dueDate.value
       
-       newProject.addTask(new ToDoTask(taskNameInput,priorityInput, dueDateinput))
+       project.addTask(new ToDoTask(taskNameInput,priorityInput, dueDateinput))
        Show.newTaskCard(taskNameInput,priorityInput, dueDateinput);
+       Show.taskEvent(project);
   }
 
   static newTaskCard(name,priority,dueDate){
        const taskFormContainer = document.getElementById("task-form-container");
        taskFormContainer.innerHTML += `
-      <div class="row">
+      <div class="row" id="task-card-container">
        <div class="col-sm-6">
          <div class="card">
            <div class="card-body">
@@ -98,11 +100,12 @@ export default class Show {
 
              <p class="card-text" id="card-priority">${priority}</p>
              <p class="card-text" id="card-duedate">${dueDate}</p>
-             <i class="far fa-trash-alt p-2"></i>
+             <i class="far fa-trash-alt p-2 delete"></i>
            </div>
          </div>
        </div>
      </div>`;
+     Show.removeTaskEvent()
   }
 
   static projectEvent(){
@@ -115,17 +118,27 @@ export default class Show {
     );
   }
 
-  static deleteProjectEvent(){
+  static deleteProjectEvent(projectName){
        appendProjectToList.addEventListener('click', (e) => {
           if(e.target.classList.contains('delete')){
-               e.target.parentElement.remove()
+              e.target.parentElement.remove()
+              return Project.deleteProject(projectName)
           }
        })
   }
 
-//   static deleteProjectEvent(){
-    
-//   }
+  static removeTaskEvent(){
+     const taskForm = document.getElementById("task-form-container");
+     taskForm.addEventListener('click',(e) => {
+          if(e.target.classList.contains('delete')){
+              return e.target.parentNode.parentNode.parentNode.parentNode.remove()
+          }
+     })
+  }
+
+  // static removeTask(projectName,taskName){
+  //   .findProject(projectName).removeTaskFromProject(taskName)
+  // }
 }
 
 // (e) => {
