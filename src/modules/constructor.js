@@ -25,39 +25,52 @@ export class Project {
     this.taskArray = [];
     // this.taskArray.push(new ToDoTask('Default'))
   }
+
+  taskArray() {
+    return this.taskArray;
+  }
+
+  // projectTitle() {
+  //   return this.title;
+  // }
+
+  static findProject(title){
+    return projectArray.find((project) => {
+     return project.title === title
+    })
+  }
+
+   addTask(newTask) {
+    if (this.taskArray.find((task) => task.name === newTask.name))
+      return this.taskArray.push(newTask);
+  }
+
+  static isPresent(projectName) {
+    return projectArray.some(
+      (project) => {
+       return project.title === projectName
   
-  taskArray(){
-    return this.taskArray
+      }
+    );
   }
 
-  addTask(newTask) {
-    if (this.taskArray.find((task) => task.name === newTask.name)) 
-    return this.taskArray.push(newTask);
-  }
-
-  isPresent(projectName){
-     return this.projectArray.some((project) => project.projectTitle() === projectName);
-  }
 
   removeTaskFromProject(eachTask) {
     this.taskArray = this.taskArray.filter((task) => task.title !== eachTask);
     return this.taskArray;
   }
 
-  projectTitle(){
-    return this.title
+  static addProject(newProject) {
+    if (!projectArray.find((project) => project.title === newProject.title)){
+     projectArray.push(newProject);
+    }
   }
 
-  addProject(newProject) {
-    if (projectArray.find((project) => project.title === newProject.title))
-      return projectArray.push(newProject);
+   static deleteProject(projectName) {
+    const deleteProject = projectArray.find(
+      (project) => project.title === projectName
+    );
+    projectArray.splice(projectArray.indexOf(deleteProject), 1);
   }
-
-  // deleteProject(projectName) {
-  //   const deleteProject = projectArray.find(
-  //     (project) => project.title === projectName
-  //   );
-  //   projectArray.splice(projectArray.indexOf(deleteProject), 1);
-  // }
 }
 
