@@ -18,5 +18,4 @@
 // import Storage from "./,localStorage";
 import  Show  from "./modules/show";
 
-
-document.addEventListener("DOMContentLoaded", Show.projectEvent);
+document.addEventListener("DOMContentLoaded", Show.projectEvent, Show.defaultProject());
