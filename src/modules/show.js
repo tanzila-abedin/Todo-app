@@ -26,15 +26,23 @@ export default class Show {
         Project.addProject(newProject); 
         Show.newProjectTemplate(projectValue);
         Show.newTaskForm(projectValue)
+      }
   }
 
-  }
+  static defaultProject(){
+    const project = new Project('Default')
+     Project.addProject(project); 
+     Show.newProjectTemplate('Default')
+     Show.newTaskForm('Default');
+    }
+
 
   static newProjectTemplate(title) {
     appendProjectToList.innerHTML += `
-     <li class="left-container d-flex align-items-baseline justify-content-between">
-       <span>${title}</span>
-       <i class="far fa-trash-alt p-2 delete"></i>
+     <li class="left-container d-flex align-items-baseline justify-content-evenly">
+      <button class="project-btn border-0"><i class="far fa-folder-open "></i></button>
+      <span>${title}</span>
+      <i class="far fa-trash-alt p-2 delete"></i>
      </li>`;
      Show.deleteProjectEvent(title)
   }
@@ -135,14 +143,4 @@ export default class Show {
           }
      })
   }
-
-  // static removeTask(projectName,taskName){
-  //   .findProject(projectName).removeTaskFromProject(taskName)
-  // }
 }
-
-// (e) => {
-//   if (e.target.classList.contains("delete")) {
-//     e.target.parentElement.remove();
-//   }
-// };

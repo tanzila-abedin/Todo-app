@@ -23,7 +23,6 @@ export class Project {
   constructor(title) {
     this.title = title;
     this.taskArray = [];
-    // this.taskArray.push(new ToDoTask('Default'))
   }
 
   taskArray() {
@@ -63,6 +62,7 @@ export class Project {
   static addProject(newProject) {
     if (!projectArray.find((project) => project.title === newProject.title)){
      projectArray.push(newProject);
+     console.log(projectArray)
     }
   }
 
