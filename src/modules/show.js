@@ -45,12 +45,13 @@ export default class Show {
         projectButton.addEventListener('click',(e) => {
           e.preventDefault()
           // alert("clicked");
-          const taskFormContainer = document.getElementById(
-            "task-form-container"
-          );
+          const taskFormContainer = document.getElementById("task-form-container");
           taskFormContainer.innerHTML = ''
+
+          const taskAddContainer = document.getElementById("add-task-container")
+          taskAddContainer.innerHTML = ''
           Show.newTaskForm(projectButton.textContent);
-          Show.taskEvent(projectArray[index])
+          // Show.taskEvent(projectArray[index])
            projectArray[index].taskArray.forEach((task) => {
              Show.newTaskCard(task.name, task.priority, task.dueDate);
             //  Show.taskEvent();      
@@ -137,12 +138,11 @@ export default class Show {
       // const userForm = document.getElementById('usrform')
       //   userForm.reset()
        Show.newTaskCard(taskNameInput,priorityInput, dueDateinput);
-       Show.taskEvent(project);
   }
 
   static newTaskCard(name,priority,dueDate){
-       const taskFormContainer = document.getElementById("add-task-container");
-       taskFormContainer.innerHTML += `
+       const addTaskContainer = document.getElementById("add-task-container");
+       addTaskContainer.innerHTML += `
       <div class="row" id="task-card-container">
        <div class="col-sm-6">
          <div class="card">
