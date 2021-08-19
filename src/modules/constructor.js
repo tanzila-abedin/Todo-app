@@ -1,7 +1,7 @@
 export class ToDoTask{
-     constructor(name,description,dueDate,priority){
+     constructor(name,priority,dueDate){
           this.name = name
-          this.description = description
+
           this.priority = priority;
           this.dueDate = dueDate
      } 
@@ -39,9 +39,11 @@ export class Project {
     })
   }
 
-   addTask(newTask) {
-    if (this.taskArray.find((task) => task.name === newTask.name))
+   addNewTask(newTask) {
+    if (!this.taskArray.find((task) => task.name === newTask.name)){
       return this.taskArray.push(newTask);
+      // console.log(this.taskArray)
+   }
   }
 
   static isPresent(projectName) {
