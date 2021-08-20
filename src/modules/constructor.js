@@ -1,7 +1,7 @@
 export class ToDoTask{
-     constructor(name,priority,dueDate){
+     constructor(name,description,priority,dueDate){
           this.name = name
-
+          this.description = description
           this.priority = priority;
           this.dueDate = dueDate
      } 
@@ -23,9 +23,9 @@ export class Project {
   constructor(title) {
     this.title = title;
     this.taskArray = [];
-  }
+ }
 
-  taskArray() {
+ static taskArray() {
     return this.taskArray;
   }
 
@@ -56,10 +56,10 @@ export class Project {
   }
 
 
-  removeTaskFromProject(eachTask) {
-    this.taskArray = this.taskArray.filter((task) => task.title !== eachTask);
-    return this.taskArray;
-  }
+  //  static removeTaskFromProject(eachTask) {
+  //   this.taskArray = this.taskArray.filter((task) => task.title !== eachTask.title);
+  //   return this.taskarray
+  // }
 
   static addProject(newProject) {
     if (!projectArray.find((project) => project.title === newProject.title)){
