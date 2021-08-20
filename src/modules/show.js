@@ -148,7 +148,10 @@ export default class Show {
 
   static projectEvent() {
     projectSubmit.addEventListener("click", (e) => {
-      e.preventDefault(), Show.addProject();
+      e.preventDefault(),
+       Show.addProject();
+      const resetForm = document.getElementById('my-form')
+      resetForm.reset();
     });
   }
 
