@@ -1,4 +1,9 @@
-import { ToDoTask, Project, projectArray } from "./constructor";
+import { ToDoTask, Project} from "./constructor";
+// import {setProject, getProject } from "./localStorage"
+
+
+
+
 
 const ProjectList = document.getElementById("project-list");
 const appendProjectToList = document.getElementById("project-home");
@@ -10,6 +15,8 @@ const taskFormContainer = document.getElementById("task-form-container");
 const newProject = new Project();
 
 export default class Show {
+  
+
   static addProject() {
     const projectInput = document.getElementById("project-input");
     const projectValue = projectInput.value;
@@ -26,7 +33,6 @@ export default class Show {
       Show.newProjectTemplate(projectValue);
       taskFormContainer.innerHTML = "";
       Show.newTaskForm(projectValue);
-      // Show.projectButtons(projectValue)
     }
   }
 
@@ -69,6 +75,7 @@ export default class Show {
       <span class="project-btn">${title}</span>
       <button class="delete"><i class="far fa-trash-alt p-2"></i></button>
      </li>`;
+    
     Show.projectButtons(title);
     Show.deleteProjectEvent();
   }
@@ -175,9 +182,7 @@ export default class Show {
       removeButton.addEventListener("click", (e) => {
 
         const projectName = document.getElementById('project-title')
-        console.log(projectName)
         const findProject = Project.findProject(projectName.textContent)
-        console.log(findProject)
 
         const findTask = findProject.taskArray.find((task) => task.name === index);
         findProject.taskArray.splice(findProject.taskArray.indexOf(findTask), 1);

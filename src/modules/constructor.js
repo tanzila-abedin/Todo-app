@@ -1,3 +1,22 @@
+// import {projectArray } from "./show"
+// import {getProject, setProject} from "./localStorage"
+// import Show from "./show";
+
+
+export let projectArray = [];
+
+// export function localStorage(){
+// if (getProject() && getProject().length) {
+//   projectArray = getProject();
+//   projectArray.forEach(element => {
+//     const title = element.title
+//   });
+// } else {
+//   projectArray = [];
+// }
+// }
+
+
 export class ToDoTask{
      constructor(name,description,priority,dueDate){
           this.name = name
@@ -17,7 +36,6 @@ export class ToDoTask{
      }
 }
 
-export let projectArray = []
 
 export class Project {
   constructor(title) {
@@ -56,15 +74,16 @@ export class Project {
   }
 
 
-  //  static removeTaskFromProject(eachTask) {
-  //   this.taskArray = this.taskArray.filter((task) => task.title !== eachTask.title);
-  //   return this.taskarray
-  // }
+   static removeTaskFromProject(eachTask) {
+    this.taskArray = this.taskArray.filter((task) => task.title !== eachTask.title);
+    return this.taskarray
+  }
 
   static addProject(newProject) {
     if (!projectArray.find((project) => project.title === newProject.title)){
      projectArray.push(newProject);
      console.log(projectArray)
+    //  setProject(projectArray)
     }
   }
 

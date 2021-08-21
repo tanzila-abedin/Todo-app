@@ -17,5 +17,6 @@
 
 // import Storage from "./,localStorage";
 import  Show  from "./modules/show";
+// import  {localStorage} from "./modules/constructor"
 
 document.addEventListener("DOMContentLoaded", Show.projectEvent, Show.defaultProject());
