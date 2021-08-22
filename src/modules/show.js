@@ -1,5 +1,5 @@
-import { ToDoTask, Project} from "./constructor";
-// import {setProject, getProject } from "./localStorage"
+import { ToDoTask, Project, projectArray} from "./constructor";
+import {setProject, getProject } from "./localStorage"
 
 
 
@@ -106,19 +106,20 @@ export default class Show {
                  <input type="submit" id="task-submit">
                </form> 
        </div>`;
-    const project = Project.findProject(projectTitle);
-    Show.taskEvent(project);
+    const projectIndex = Project.findProject(projectTitle);
+    const project = projectArray[projectIndex]
+    Show.taskEvent(project, projectIndex);
   }
 
-  static taskEvent(project) {
+  static taskEvent(project,index) {
     const taskSubmit = document.getElementById("usrform");
     taskSubmit.addEventListener("submit", (e) => {
       e.preventDefault();
-      Show.addTask(project);
+      Show.addTask(project,index);
     });
   }
 
-  static addTask(project) {
+  static addTask(project,index) {
     const taskName = document.getElementById("task-name");
     const taskNameInput = taskName.value;
     const description = document.getElementById("description");
@@ -127,11 +128,28 @@ export default class Show {
     const priorityInput = priority.value;
     const dueDate = document.getElementById("due-date");
     const dueDateinput = dueDate.value;
+    const projects = getProject()
 
-    project.addNewTask(
-      new ToDoTask(taskNameInput, descInput, priorityInput, dueDateinput)
-    );
-    Show.newTaskCard(taskNameInput, descInput, priorityInput, dueDateinput);
+    const newTask = new ToDoTask(
+       taskNameInput,
+       descInput,
+       priorityInput,
+       dueDateinput
+     );
+
+    if (!projects[index].taskArray.find((task) => task.name === newTask.name)){
+        projects[index].taskArray.push(newTask);
+        setProject(projects);
+        Show.newTaskCard(taskNameInput, descInput, priorityInput, dueDateinput);
+        return 
+      // console.log(this.taskArray)
+   }
+    // setProject(project)
+ 
+    // projects[index].addNewTask(
+    //   new ToDoTask(taskNameInput, descInput, priorityInput, dueDateinput)
+    // );
+    // Show.newTaskCard(taskNameInput, descInput, priorityInput, dueDateinput);
   }
 
   static newTaskCard(name, description, priority, dueDate) {

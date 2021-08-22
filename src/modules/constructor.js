@@ -1,20 +1,16 @@
 // import {projectArray } from "./show"
-// import {getProject, setProject} from "./localStorage"
+import {getProject, setProject} from "./localStorage"
 // import Show from "./show";
 
 
-export let projectArray = [];
+export let projectArray;
 
-// export function localStorage(){
-// if (getProject() && getProject().length) {
-//   projectArray = getProject();
-//   projectArray.forEach(element => {
-//     const title = element.title
-//   });
-// } else {
-//   projectArray = [];
-// }
-// }
+
+if (getProject() && getProject().length) {
+  projectArray = getProject();
+} else {
+  projectArray = [];
+}
 
 
 export class ToDoTask{
@@ -52,17 +48,17 @@ export class Project {
   // }
 
   static findProject(title){
-    return projectArray.find((project) => {
+    return projectArray.findIndex((project) => {
      return project.title === title
     })
   }
 
-   addNewTask(newTask) {
-    if (!this.taskArray.find((task) => task.name === newTask.name)){
-      return this.taskArray.push(newTask);
-      // console.log(this.taskArray)
-   }
-  }
+  //  addNewTask(newTask) {
+  //   if (!this.taskArray.find((task) => task.name === newTask.name)){
+  //     return this.taskArray.push(newTask);
+  //     // console.log(this.taskArray)
+  //  }
+  // }
 
   static isPresent(projectName) {
     return projectArray.some(
@@ -83,7 +79,7 @@ export class Project {
     if (!projectArray.find((project) => project.title === newProject.title)){
      projectArray.push(newProject);
      console.log(projectArray)
-    //  setProject(projectArray)
+     setProject(projectArray)
     }
   }
 

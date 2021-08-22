@@ -41,7 +41,7 @@ import  Show  from "./show";
 // export let projectArray;
 // save projects
 export function setProject(array){
-  localStorage.clear()
+
   const arrayString = JSON.stringify(array)
 //   console.log(projectArray)
   localStorage.setItem("projects",arrayString)
@@ -54,6 +54,8 @@ export function getProject(){
      return JSON.parse(arrayString);
   }
 }
+
+
 
 // if (getProject() && getProject().length) {
 //   projectArray = getProject()
