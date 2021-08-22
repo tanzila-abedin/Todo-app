@@ -47,8 +47,14 @@ export class Project {
   //   return this.title;
   // }
 
-  static findProject(title){
+  static findProjectIndex(title){
     return projectArray.findIndex((project) => {
+     return project.title === title
+    })
+  }
+
+  static findProject(title){
+    return projectArray.find((project) => {
      return project.title === title
     })
   }
@@ -84,10 +90,12 @@ export class Project {
   }
 
    static deleteProject(projectName) {
-    const deleteProject = projectArray.find(
+    const deleteProject = projectArray.findIndex(
       (project) => project.title === projectName
     );
-    projectArray.splice(projectArray.indexOf(deleteProject), 1);
+    const projects = getProject()
+    projects.splice(deleteProject,1);
+    setProject(projects);
   }
 }
 

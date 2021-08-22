@@ -106,7 +106,7 @@ export default class Show {
                  <input type="submit" id="task-submit">
                </form> 
        </div>`;
-    const projectIndex = Project.findProject(projectTitle);
+    const projectIndex = Project.findProjectIndex(projectTitle);
     const project = projectArray[projectIndex]
     Show.taskEvent(project, projectIndex);
   }
@@ -200,11 +200,15 @@ export default class Show {
       removeButton.addEventListener("click", (e) => {
 
         const projectName = document.getElementById('project-title')
-        const findProject = Project.findProject(projectName.textContent)
-
-        const findTask = findProject.taskArray.find((task) => task.name === index);
-        findProject.taskArray.splice(findProject.taskArray.indexOf(findTask), 1);
+        const findProjectIndex = Project.findProjectIndex(projectName.textContent)
         
+        const projects = getProject()
+      
+        const findTask = projects[findProjectIndex].taskArray.find((task) => task.name === index);
+        projects[findProjectIndex].taskArray.splice(projects[findProjectIndex].taskArray.indexOf(findTask), 1);
+
+        setProject(projects);
+
         e.target.parentNode.parentNode.parentNode.parentNode.remove();
         const taskAddContainer = document.getElementById("add-task-container");
         taskAddContainer.innerHTML = "";
