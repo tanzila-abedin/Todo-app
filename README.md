@@ -3,6 +3,8 @@
 
 A simple  to do list Application which dynamically renders projects in JavaScript using the Webpack. Projects and tasks can be created and stored in Web browser's local storage.
 
+[Click here to view live demo](https://tanzila-abedin.github.io/Todo-app/)
+
 ## Built With
 
 - JavaScript
