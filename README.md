@@ -9,7 +9,6 @@ A simple  to do list Application which dynamically renders projects in JavaScrip
 
 - JavaScript
 - HTML
-- SCSS
 - bootstrap
 - Webpack
 
