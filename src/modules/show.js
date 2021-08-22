@@ -1,10 +1,6 @@
 import { ToDoTask, Project, projectArray} from "./constructor";
 import {setProject, getProject } from "./localStorage"
 
-
-
-
-
 const ProjectList = document.getElementById("project-list");
 const appendProjectToList = document.getElementById("project-home");
 const projectFormContainer = document.getElementById("project-form-container");
@@ -36,10 +32,19 @@ export default class Show {
     }
   }
 
+  static disStoredProject(){
+    projectArray.forEach((element)=> {
+      const title = element.title
+      Show.newProjectTemplate(title)
+    })
+  }
+
+
   static defaultProject() {
     const project = new Project("Default");
     Project.addProject(project);
-    Show.newProjectTemplate("Default");
+    // Show.newProjectTemplate("Default");
+    Show.disStoredProject();
     taskFormContainer.innerHTML = "";
     Show.newTaskForm("Default");
   }
@@ -71,7 +76,7 @@ export default class Show {
 
   static newProjectTemplate(title) {
     appendProjectToList.innerHTML += `
-     <li class="left-container d-flex align-items-baseline justify-content-evenly">
+     <li class="left-container d-flex align-items-baseline justify-content-between">
       <span class="project-btn">${title}</span>
       <button class="delete"><i class="far fa-trash-alt p-2"></i></button>
      </li>`;
@@ -83,7 +88,7 @@ export default class Show {
   static newTaskForm(projectTitle) {
     const taskFormContainer = document.getElementById("task-form-container");
     taskFormContainer.innerHTML += `
-       <div>
+       <div class="text-center">
            <h4 id="project-title">${projectTitle}</h4>
            <form class="d-flex flex-column align-items-center task-form" id="usrform">
                  <label for="task-name" class="p-2">Name</label>
@@ -157,7 +162,7 @@ export default class Show {
     addTaskContainer.innerHTML += `
       <div class="row" id="task-card-container">
        <div class="col-sm-12">
-         <div class="card d-flex flex-column">
+         <div class="card">
            <div class="card-body">
              <h5 class="card-title" id="card-task-name">${name}</h5>
              <p class="card-text" id="card-description">${description}</p>
@@ -209,9 +214,7 @@ export default class Show {
 
         setProject(projects);
 
-        e.target.parentNode.parentNode.parentNode.parentNode.remove();
-        const taskAddContainer = document.getElementById("add-task-container");
-        taskAddContainer.innerHTML = "";
+        e.target.parentElement.parentElement.parentElement.remove();
 
 
       });

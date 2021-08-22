@@ -4,8 +4,6 @@ import {getProject, setProject} from "./localStorage"
 
 
 export let projectArray;
-
-
 if (getProject() && getProject().length) {
   projectArray = getProject();
 } else {
