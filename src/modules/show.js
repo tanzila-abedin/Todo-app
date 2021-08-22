@@ -23,6 +23,8 @@ export default class Show {
       Show.newProjectTemplate(projectValue);
       taskFormContainer.innerHTML = '';
       Show.newTaskForm(projectValue);
+      const taskAddContainer = document.getElementById("add-task-container");
+      taskAddContainer.innerHTML = "";
     }
   }
 
@@ -54,8 +56,12 @@ export default class Show {
 
         const taskAddContainer = document.getElementById('add-task-container');
         taskAddContainer.innerHTML = '';
+
+        const projects = getProject() 
+
         Show.newTaskForm(projectButton.textContent);
-        projectArray[index].taskArray.forEach((task) => {
+        projects[index].taskArray.forEach((task) => {
+          setProject(projects)
           Show.newTaskCard(
             task.name,
             task.description,
