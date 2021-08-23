@@ -11,14 +11,11 @@ export default class Show {
     const projectInput = document.getElementById('project-input');
     const projectValue = projectInput.value;
     if (projectValue === '') {
-      alert('fill name');
-      // Show.fillModal();
+      projectInput.value = ''
       return;
     }
     if (Project.isPresent(projectValue)) {
       projectInput.value = '';
-      alert('differnt name');
-      // Show.diffModal()
     } else {
       const newProject = new Project(projectValue);
       Project.addProject(newProject);
