@@ -11,7 +11,7 @@ export default class Show {
     const projectInput = document.getElementById('project-input');
     const projectValue = projectInput.value;
     if (projectValue === '') {
-      projectInput.value = ''
+      projectInput.value = '';
       return;
     }
     if (Project.isPresent(projectValue)) {
@@ -26,7 +26,6 @@ export default class Show {
       taskAddContainer.innerHTML = '';
     }
   }
-
 
   static disStoredProject() {
     projectArray.forEach((element) => {
@@ -185,7 +184,6 @@ export default class Show {
         const title = e.target.parentNode.parentNode.childNodes[1].textContent;
 
         Show.updateTask(title, index);
-        console.log(index, 'index');
       });
     });
   }
@@ -199,7 +197,6 @@ export default class Show {
 
     updateBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      console.log(todoIdx, 'todo');
 
       const taskName = document.getElementById('task-name');
       const taskNameInput = taskName.value;
