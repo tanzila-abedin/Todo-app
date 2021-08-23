@@ -8,25 +8,81 @@ const taskFormContainer = document.getElementById('task-form-container');
 
 export default class Show {
   static addProject() {
-    const projectInput = document.getElementById('project-input');
+    const projectInput = document.getElementById("project-input");
     const projectValue = projectInput.value;
-    if (projectValue === '') {
-      alert('Fill in a Project Name');
+    if (projectValue === "") {
+      alert("fill name")
+      // Show.fillModal();
       return;
     }
     if (Project.isPresent(projectValue)) {
-      projectInput.value = '';
-      alert('choose a different project name');
+      projectInput.value = "";
+      alert("differnt name")
+      // Show.diffModal()
     } else {
       const newProject = new Project(projectValue);
       Project.addProject(newProject);
       Show.newProjectTemplate(projectValue);
-      taskFormContainer.innerHTML = '';
+      taskFormContainer.innerHTML = "";
       Show.newTaskForm(projectValue);
       const taskAddContainer = document.getElementById("add-task-container");
       taskAddContainer.innerHTML = "";
     }
   }
+
+  // static fillModal() {
+  //   const modalBtn = document.getElementById("project-submit");
+  //   const modal = document.createElement("div");
+  //   modal.className = "modal";
+
+  //   modal.innerHTML += `
+  //    <div class="modal-content">
+  //      <span class="close">&times;</span>
+  //      <p>Fill in a Project Name</p>
+  //    </div>`;
+
+  //   const spanClose = document.getElementsByClassName("close")[0];
+
+  //   modalBtn.onclick = () => {
+  //     modal.style.display = "block";
+  //   };
+  //   spanClose.onclick = () => {
+  //     modal.style.display = "none";
+  //   };
+
+  //   window.onclick = (event) => {
+  //     if (event.target == modal) {
+  //       modal.style.display = "none";
+  //     }
+  //   };
+  // }
+
+  // static diffModal() {
+  //   const modalBtn = document.getElementById("project-submit");
+  //   const modal = document.createElement("div");
+  //   modal.className = "modal";
+
+  //   modal.innerHTML += `
+  //    <div class="modal-content">
+  //      <span class="close">&times;</span>
+  //      <p>Choose a different proejct name</p>
+  //    </div>`;
+
+  //   const spanClose = document.getElementsByClassName("close")[0];
+
+  //   modalBtn.onclick = () => {
+  //     modal.style.display = "block";
+  //   };
+  //   spanClose.onclick = () => {
+  //     modal.style.display = "none";
+  //   };
+
+  //   window.onclick = (event) => {
+  //     if (event.target == modal) {
+  //       modal.style.display = "none";
+  //     }
+  //   };
+  // }
 
   static disStoredProject() {
     projectArray.forEach((element) => {
@@ -36,37 +92,36 @@ export default class Show {
   }
 
   static defaultProject() {
-    const project = new Project('Default');
+    const project = new Project("Default");
     Project.addProject(project);
-    // Show.newProjectTemplate("Default");
     Show.disStoredProject();
-    taskFormContainer.innerHTML = '';
-    Show.newTaskForm('Default');
+    taskFormContainer.innerHTML = "";
+    Show.newTaskForm("Default");
   }
 
   static projectButtons() {
-    const projectButtons = document.querySelectorAll('.project-btn');
+    const projectButtons = document.querySelectorAll(".project-btn");
     projectButtons.forEach((projectButton, index) => {
-      projectButton.addEventListener('click', (e) => {
+      projectButton.addEventListener("click", (e) => {
         e.preventDefault();
         const taskFormContainer = document.getElementById(
-          'task-form-container',
+          "task-form-container"
         );
-        taskFormContainer.innerHTML = '';
+        taskFormContainer.innerHTML = "";
 
-        const taskAddContainer = document.getElementById('add-task-container');
-        taskAddContainer.innerHTML = '';
+        const taskAddContainer = document.getElementById("add-task-container");
+        taskAddContainer.innerHTML = "";
 
-        const projects = getProject() 
+        const projects = getProject();
 
         Show.newTaskForm(projectButton.textContent);
         projects[index].taskArray.forEach((task) => {
-          setProject(projects)
+          setProject(projects);
           Show.newTaskCard(
             task.name,
             task.description,
             task.priority,
-            task.dueDate,
+            task.dueDate
           );
         });
       });
@@ -85,7 +140,7 @@ export default class Show {
   }
 
   static newTaskForm(projectTitle) {
-    const taskFormContainer = document.getElementById('task-form-container');
+    const taskFormContainer = document.getElementById("task-form-container");
     taskFormContainer.innerHTML += `
        <div class="text-center">
            <h4 id="project-title">${projectTitle}</h4>
@@ -108,6 +163,7 @@ export default class Show {
                  <input type="datetime-local" id="due-date" name="due-date"><br>
                  
                  <input type="submit" id="task-submit">
+                 <input type="submit" class="d-none" id="task-update" name="update" value="update">
                </form> 
        </div>`;
     const projectIndex = Project.findProjectIndex(projectTitle);
@@ -116,21 +172,21 @@ export default class Show {
   }
 
   static taskEvent(project, index) {
-    const taskSubmit = document.getElementById('usrform');
-    taskSubmit.addEventListener('submit', (e) => {
+    const taskSubmit = document.getElementById("usrform");
+    taskSubmit.addEventListener("submit", (e) => {
       e.preventDefault();
       Show.addTask(project, index);
     });
   }
 
   static addTask(project, index) {
-    const taskName = document.getElementById('task-name');
+    const taskName = document.getElementById("task-name");
     const taskNameInput = taskName.value;
-    const description = document.getElementById('description');
+    const description = document.getElementById("description");
     const descInput = description.value;
-    const priority = document.getElementById('priority');
+    const priority = document.getElementById("priority");
     const priorityInput = priority.value;
-    const dueDate = document.getElementById('due-date');
+    const dueDate = document.getElementById("due-date");
     const dueDateinput = dueDate.value;
     const projects = getProject();
 
@@ -138,7 +194,7 @@ export default class Show {
       taskNameInput,
       descInput,
       priorityInput,
-      dueDateinput,
+      dueDateinput
     );
 
     if (!projects[index].taskArray.find((task) => task.name === newTask.name)) {
@@ -149,7 +205,7 @@ export default class Show {
   }
 
   static newTaskCard(name, description, priority, dueDate) {
-    const addTaskContainer = document.getElementById('add-task-container');
+    const addTaskContainer = document.getElementById("add-task-container");
     addTaskContainer.innerHTML += `
       <div class="row" id="task-card-container">
        <div class="col-sm-12">
@@ -160,48 +216,120 @@ export default class Show {
              <p class="card-text" id="card-priority">${priority}</p><br>
              <p class="card-text" id="card-duedate">${dueDate}</p>
              <button class="remove"><i class="far fa-trash-alt p-2 trash"></i></button>
+             <button class="edit"><i class="far fa-edit"></i></button>
            </div>
          </div>
        </div>
      </div>`;
     Show.removeTaskEvent();
+    Show.editTaskEvent()
   }
 
+   static editTaskEvent(){
+    const editButtons = document.querySelectorAll(".edit")
+    editButtons.forEach((editbtn,index) => {
+      editbtn.addEventListener("click",(e) => {
+        e.preventDefault();
+      const  taskSubmit = document.getElementById("task-submit")
+      taskSubmit.className =  "d-none" 
+      const taskUpdate = document.getElementById("task-update")
+      taskUpdate.className = "d-block"       
+      Show.updateTask(index)
+    
+    })
+  })
+}
+  static updateTask(index){
+    const  updateBtn = document.getElementById("task-update")
+    updateBtn.addEventListener("click",() => {
+
+        const taskName = document.getElementById("task-name");
+        const taskNameInput = taskName.value;
+        const description = document.getElementById("description");
+        const descInput = description.value;
+        const priority = document.getElementById("priority");
+        const priorityInput = priority.value;
+        const dueDate = document.getElementById("due-date");
+        const dueDateInput = dueDate.value;
+
+        const projectName = document.getElementById("project-title");
+        const findProjectIndex = Project.findProjectIndex(
+          projectName.textContent
+        );
+
+        const projects = getProject();
+
+        const findTask = index
+        console.log(findTask)
+
+        projects[findProjectIndex].taskArray[findTask].name = taskNameInput;
+        projects[findProjectIndex].taskArray[findTask].description = descInput;
+        projects[findProjectIndex].taskArray[findTask].priority = priorityInput;
+        projects[findProjectIndex].taskArray[findTask].dueDate = dueDateInput;
+
+        setProject(projects);
+
+       const taskAddContainer = document.getElementById("add-task-container");
+        taskAddContainer.innerHTML = "";
+
+        projects[findProjectIndex].taskArray.forEach((task) => {
+          Show.newTaskCard(
+            task.name,
+            task.description,
+            task.priority,
+            task.dueDate
+          );
+        });
+            const taskSubmit = document.getElementById("task-submit");
+            taskSubmit.className = "d-block";
+            const taskUpdate = document.getElementById("task-update");
+            taskUpdate.className = "d-none";    
+
+        
+    })
+
+  }
+  
   static projectEvent() {
-    projectSubmit.addEventListener('click', (e) => {
+    projectSubmit.addEventListener("click", (e) => {
       e.preventDefault();
       Show.addProject();
-      const resetForm = document.getElementById('my-form');
+      const resetForm = document.getElementById("my-form");
       resetForm.reset();
     });
   }
 
   static deleteProjectEvent() {
-    const deleteButtons = document.querySelectorAll('.delete');
+    const deleteButtons = document.querySelectorAll(".delete");
     deleteButtons.forEach((deleteButton, index) => {
-      deleteButton.addEventListener('click', (e) => {
+      deleteButton.addEventListener("click", (e) => {
         Project.deleteProject(index);
         e.target.parentElement.parentElement.remove();
-        taskFormContainer.innerHTML = '';
-        const taskAddContainer = document.getElementById('add-task-container');
-        taskAddContainer.innerHTML = '';
-        Show.newTaskForm('Default');
+        taskFormContainer.innerHTML = "";
+        const taskAddContainer = document.getElementById("add-task-container");
+        taskAddContainer.innerHTML = "";
+        Show.newTaskForm("Default");
       });
     });
   }
 
   static removeTaskEvent() {
-    const removeButtons = document.querySelectorAll('.remove');
+    const removeButtons = document.querySelectorAll(".remove");
     removeButtons.forEach((removeButton, index) => {
-      removeButton.addEventListener('click', (e) => {
-        const projectName = document.getElementById('project-title');
-        const findProjectIndex = Project.findProjectIndex(projectName.textContent);
+      removeButton.addEventListener("click", (e) => {
+        const projectName = document.getElementById("project-title");
+        const findProjectIndex = Project.findProjectIndex(
+          projectName.textContent
+        );
 
         const projects = getProject();
 
-        const findTask = projects[findProjectIndex].taskArray.find((task) => task.name === index);
+        const findTask = projects[findProjectIndex].taskArray.find(
+          (task) => task.name === index
+        );
         projects[findProjectIndex].taskArray.splice(
-          projects[findProjectIndex].taskArray.indexOf(findTask), 1,
+          projects[findProjectIndex].taskArray.indexOf(findTask),
+          1
         );
 
         setProject(projects);
