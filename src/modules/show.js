@@ -11,15 +11,19 @@ export default class Show {
     const projectInput = document.getElementById('project-input');
     const projectValue = projectInput.value;
     if (projectValue === '') {
-      projectInput.value = '';
+      alert("Fill in a project name");
       return;
     }
     if (Project.isPresent(projectValue)) {
+      alert("choose a diffrent name")
       projectInput.value = '';
     } else {
       const newProject = new Project(projectValue);
       Project.addProject(newProject);
+      // setProject(projects)
+      // Show.disStoredProject();
       Show.newProjectTemplate(projectValue);
+      
       taskFormContainer.innerHTML = '';
       Show.newTaskForm(projectValue);
       const taskAddContainer = document.getElementById('add-task-container');
@@ -28,8 +32,10 @@ export default class Show {
   }
 
   static disStoredProject() {
-    projectArray.forEach((element) => {
+    const projects = getProject()
+    projects.forEach((element) => {
       const { title } = element;
+      setProject(projects)
       Show.newProjectTemplate(title);
     });
   }
@@ -38,6 +44,7 @@ export default class Show {
     const project = new Project('Default');
     Project.addProject(project);
     Show.disStoredProject();
+    Show.projectButtons();     
     taskFormContainer.innerHTML = '';
     Show.newTaskForm('Default');
   }
@@ -67,6 +74,7 @@ export default class Show {
             task.dueDate,
           );
         });
+        // setProject(projects);
         Show.editTaskEvent(index);
       });
     });
@@ -245,7 +253,7 @@ export default class Show {
     deleteButtons.forEach((deleteButton, index) => {
       deleteButton.addEventListener('click', (e) => {
         Project.deleteProject(index);
-        e.target.parentElement.parentElement.remove();
+        e.target.parentNode.parentNode.remove();
         taskFormContainer.innerHTML = '';
         const taskAddContainer = document.getElementById('add-task-container');
         taskAddContainer.innerHTML = '';
