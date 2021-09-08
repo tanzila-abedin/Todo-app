@@ -44,7 +44,7 @@ export class Project {
       (project) => project.title === projectName,
     );
     const projects = getProject();
-
+    // console.log(projects)
     if(Array.isArray(projects)){
     projects.splice(deleteProject, 1);
     setProject(projects);

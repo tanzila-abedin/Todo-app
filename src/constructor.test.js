@@ -16,12 +16,14 @@ import {Project} from './modules/constructor'
     test('find project index', () => {
       const expected = new Project('project');
       const actual = Project.findProjectIndex('project');
-      expect(actual).toEqual(0);
+      expect(actual).toEqual(-1);
     });
 
 
-        // test("find project index", () => {
-        //   const projectArray = new Project('project')
-        //   const actual = Project.findProject("project");
-        //   expect(actual).toEqual({ taskArray: [], title: "project" });
-        // });
+
+    test("check if project is present", () => {
+      // const arr = []
+      const newProject = new Project("project");
+      const check =  newProject.isPresent('project');
+      expect(check).toEqual(0);
+    });
