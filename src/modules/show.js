@@ -1,6 +1,7 @@
 import { Project, projectArray } from './constructor';
 import ToDoTask from './todoTask';
 import { setProject, getProject } from './localStorage';
+import "jest-localstorage-mock";
 
 const appendProjectToList = document.getElementById('project-home');
 const projectSubmit = document.getElementById('project-submit');

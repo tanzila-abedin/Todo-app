@@ -1,4 +1,6 @@
 import { getProject, setProject } from './localStorage';
+import "jest-localstorage-mock";
+import { isArray } from 'lodash';
 
 export const projectArray = getProject() && getProject().length ? getProject() : [];
 export class Project {
@@ -21,7 +23,7 @@ export class Project {
 
   static isPresent(projectName) {
     return projectArray.some(
-      (project) => project.title === projectName,
+(project) => project.title === projectName,
     );
   }
 
@@ -42,7 +44,10 @@ export class Project {
       (project) => project.title === projectName,
     );
     const projects = getProject();
+
+    if(Array.isArray(projects)){
     projects.splice(deleteProject, 1);
     setProject(projects);
+    }
   }
 }
