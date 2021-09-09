@@ -1,4 +1,4 @@
-import {Project} from './modules/constructor'
+import {Project, projectArray} from './modules/constructor'
 
   test('create a new project',() => {
     const titleInput = "projectTitle"
@@ -15,15 +15,29 @@ import {Project} from './modules/constructor'
 
     test('find project index', () => {
       const expected = new Project('project');
+      projectArray.push(expected)
       const actual = Project.findProjectIndex('project');
-      expect(actual).toEqual(-1);
+      expect(actual).toEqual(0);
     });
 
+            test("find project title", () => {
+              const expected = new Project("project");
+              projectArray.push(expected);
+              const actual = Project.findProject("project");
+              expect(actual.title).toBe('project');
+            });
 
 
-    test("check if project is present", () => {
-      // const arr = []
-      const newProject = new Project("project");
-      const check =  newProject.isPresent('project');
-      expect(check).toEqual(0);
-    });
+        test("presence of a project to be true", () => {
+          const expected = new Project("project");
+          projectArray.push(expected);
+          const actual = Project.isPresent("project");
+          expect(actual).toBeTruthy();
+        });
+
+test('adding new project to the array', () => {
+ const newProject = new Project("jellybeans");
+ const actual = Project.addProject(newProject)
+ console.log(actual)
+ expect(actual).toContain(newProject)
+})
