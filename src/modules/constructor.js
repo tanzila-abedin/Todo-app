@@ -27,16 +27,17 @@ export class Project {
     );
   }
 
-  static removeTaskFromProject(eachTask) {
-    this.taskArray = this.taskArray.filter((task) => task.title !== eachTask.title);
-    return this.taskarray;
-  }
+  // static removeTaskFromProject(eachTask) {
+  //   this.taskArray = this.taskArray.filter((task) => task.title !== eachTask.title);
+  //   return this.taskarray;
+  // }
 
   static addProject(newProject) {
     if (!projectArray.find((project) => project.title === newProject.title)) {
       projectArray.push(newProject);
       setProject(projectArray);
     }
+    return projectArray;
   }
 
   static deleteProject(projectName) {

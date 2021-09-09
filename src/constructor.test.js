@@ -36,8 +36,16 @@ import {Project, projectArray} from './modules/constructor'
         });
 
 test('adding new project to the array', () => {
- const newProject = new Project("jellybeans");
+ const newProject =  new Project("jellybeans");
  const actual = Project.addProject(newProject)
- console.log(actual)
  expect(actual).toContain(newProject)
 })
+
+// test('remove task from a project array',() => {
+//   const newProject = new Project('nougat');
+//   projectArray.push(newProject);
+//   projectArray[4].taskArray.push('buy it')
+//   const taskTitle =  projectArray[4].taskArray[0]
+//   const actual = Project.removeTaskFromProject(taskTitle);
+//   expect(actual).toEqual([])
+// })
