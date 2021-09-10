@@ -40,3 +40,11 @@ test('adding new project to the array', () => {
  const actual = Project.addProject(newProject)
  expect(actual).toContain(newProject)
 })
+
+test('delete a project from the project array', () => {
+  const expected = new Project("new");
+  projectArray.push(expected)
+  const projectTitle = projectArray[4].title
+  const actual = Project.deleteProject(projectTitle)
+  expect(actual[4]).toBe(undefined)
+});

@@ -44,11 +44,12 @@ export class Project {
     const deleteProject = projectArray.findIndex(
       (project) => project.title === projectName,
     );
-    const projects = getProject();
+    const projects = getProject() || projectArray;
     // console.log(projects)
     if(Array.isArray(projects)){
     projects.splice(deleteProject, 1);
     setProject(projects);
     }
+    return projects
   }
 }
