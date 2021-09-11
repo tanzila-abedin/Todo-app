@@ -37,12 +37,3 @@ test ('adds a new task to the task array of a project', () => {
      expect(actual.taskArray).toContain(newTask)     
 })
 
-// test('removes a task from a project', () => {
-//      const findTask = projectArray[0]
-
-//      const actual = Show.deleteTaskFromArray(findTask)
-
-// //   const projectTitle = projectArray[4].title;
-// //   const actual = Project.deleteProject(projectTitle);
-// //   expect(actual[4]).toBe(undefined);
-// } )

@@ -11,21 +11,17 @@ export default class Show {
     const projectInput = document.getElementById('project-input');
     const projectValue = projectInput.value;
     if (projectValue === '') {
-      // alert("Fill in a project name");
+      alert("Fill in a project name");
       return;
     }
     if (Project.isPresent(projectValue)) {
-      // alert("choose a diffrent name")
+      alert("choose a diffrent name")
       projectInput.value = '';
     } else {
       const newProject = new Project(projectValue);
       const projectTitle = newProject.title
       Project.addProject(newProject);
-      // setProject(projects)
-      // Show.disStoredProject();
-
       Show.newProjectTemplate(projectTitle);
-      
       taskFormContainer.innerHTML = '';
       Show.newTaskForm(projectTitle);
       const taskAddContainer = document.getElementById('add-task-container');
@@ -90,7 +86,7 @@ export default class Show {
 
     Show.projectButtons(title);
     Show.deleteProjectEvent();
-    // return appendProjectToList.innerText
+ 
   }
 
   static newTaskForm(projectTitle) {
