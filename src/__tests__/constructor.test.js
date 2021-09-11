@@ -1,4 +1,4 @@
-import {Project, projectArray} from './modules/constructor'
+import {Project, projectArray} from '../modules/constructor'
 
   test('create a new project',() => {
     const titleInput = "projectTitle"

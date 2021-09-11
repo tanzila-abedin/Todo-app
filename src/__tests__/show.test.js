@@ -1,7 +1,7 @@
-import Show from "./modules/show"
-import { Project, projectArray } from "./modules/constructor";
-import ToDoTask from './modules/todoTask';
-import document from './document'
+import Show from "../modules/show"
+import { Project, projectArray } from "../modules/constructor";
+import ToDoTask from '../modules/todoTask';
+import document from '../document'
 
 test('append a new project title when created', () => {
      Show.newProjectTemplate('title')
