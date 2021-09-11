@@ -1,5 +1,5 @@
 
-export default document.body.innerHTML = `
+ document.body.innerHTML = `
 <html lang="en">
 <head>
      <meta charset="UTF-8">
@@ -54,3 +54,4 @@ export default document.body.innerHTML = `
 </body>
 </html>`;
 
+export default document
