@@ -1,5 +1,5 @@
 // save projects
-import "jest-localstorage-mock";
+import 'jest-localstorage-mock';
 
 export function setProject(array) {
   const arrayString = JSON.stringify(array);

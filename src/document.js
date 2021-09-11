@@ -1,5 +1,4 @@
-
- document.body.innerHTML = `
+document.body.innerHTML = `
 <html lang="en">
 <head>
      <meta charset="UTF-8">
@@ -54,4 +53,4 @@
 </body>
 </html>`;
 
-export default document
+export default document;

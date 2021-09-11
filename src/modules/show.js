@@ -1,7 +1,7 @@
 import { Project, projectArray } from './constructor';
 import ToDoTask from './todoTask';
 import { setProject, getProject } from './localStorage';
-import "jest-localstorage-mock";
+import 'jest-localstorage-mock';
 
 const projectSubmit = document.getElementById('project-submit');
 const taskFormContainer = document.getElementById('task-form-container');
@@ -11,15 +11,15 @@ export default class Show {
     const projectInput = document.getElementById('project-input');
     const projectValue = projectInput.value;
     if (projectValue === '') {
-      alert("Fill in a project name");
+      alert('Fill in a project name');
       return;
     }
     if (Project.isPresent(projectValue)) {
-      alert("choose a diffrent name")
+      alert('choose a diffrent name');
       projectInput.value = '';
     } else {
       const newProject = new Project(projectValue);
-      const projectTitle = newProject.title
+      const projectTitle = newProject.title;
       Project.addProject(newProject);
       Show.newProjectTemplate(projectTitle);
       taskFormContainer.innerHTML = '';
@@ -30,10 +30,10 @@ export default class Show {
   }
 
   static disStoredProject() {
-    const projects = getProject()
+    const projects = getProject();
     projects.forEach((element) => {
       const { title } = element;
-      setProject(projects)
+      setProject(projects);
       Show.newProjectTemplate(title);
     });
   }
@@ -42,7 +42,7 @@ export default class Show {
     const project = new Project('Default');
     Project.addProject(project);
     Show.disStoredProject();
-    Show.projectButtons();     
+    Show.projectButtons();
     taskFormContainer.innerHTML = '';
     Show.newTaskForm('Default');
   }
@@ -86,7 +86,6 @@ export default class Show {
 
     Show.projectButtons(title);
     Show.deleteProjectEvent();
- 
   }
 
   static newTaskForm(projectTitle) {
@@ -152,7 +151,7 @@ export default class Show {
       Show.newTaskCard(taskNameInput, descInput, priorityInput, dueDateinput);
       Show.editTaskEvent(index);
     }
-    return projectArray[index]
+    return projectArray[index];
   }
 
   static newTaskCard(name, description, priority, dueDate) {
@@ -264,28 +263,26 @@ export default class Show {
     const removeButtons = document.querySelectorAll('.remove');
     removeButtons.forEach((removeButton, index) => {
       removeButton.addEventListener('click', (e) => {
-        Show.deleteTaskFromArray(index)
-         e.target.parentElement.parentElement.parentElement.remove();
+        Show.deleteTaskFromArray(index);
+        e.target.parentElement.parentElement.parentElement.remove();
       });
     });
   }
 
-  static deleteTaskFromArray(index){
-   const projectName = document.getElementById("project-title");
-   const findProjectIndex = Project.findProjectIndex(projectName.textContent);
-        const projects = getProject() || projectArray
+  static deleteTaskFromArray(index) {
+    const projectName = document.getElementById('project-title');
+    const findProjectIndex = Project.findProjectIndex(projectName.textContent);
+    const projects = getProject() || projectArray;
 
-        const findTask =
-          projects[findProjectIndex].taskArray.find(
-            (task) => task.name === index
-          );
+    const findTask = projects[findProjectIndex].taskArray.find(
+      (task) => task.name === index,
+    );
 
-        projects[findProjectIndex].taskArray.splice(
-          projects[findProjectIndex].taskArray.indexOf(findTask),
-          1
-        );
-        setProject(projects);
-     return projectArray[findProjectIndex]
+    projects[findProjectIndex].taskArray.splice(
+      projects[findProjectIndex].taskArray.indexOf(findTask),
+      1,
+    );
+    setProject(projects);
+    return projectArray[findProjectIndex];
   }
-
 }

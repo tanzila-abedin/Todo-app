@@ -5,5 +5,4 @@ export default class ToDoTask {
     this.priority = priority;
     this.dueDate = dueDate;
   }
-
 }
