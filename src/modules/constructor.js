@@ -1,4 +1,6 @@
+import { isArray } from 'lodash';
 import { getProject, setProject } from './localStorage';
+import 'jest-localstorage-mock';
 
 export const projectArray = getProject() && getProject().length ? getProject() : [];
 export class Project {
@@ -25,24 +27,23 @@ export class Project {
     );
   }
 
-  static removeTaskFromProject(eachTask) {
-    this.taskArray = this.taskArray.filter((task) => task.title !== eachTask.title);
-    return this.taskarray;
-  }
-
   static addProject(newProject) {
     if (!projectArray.find((project) => project.title === newProject.title)) {
       projectArray.push(newProject);
       setProject(projectArray);
     }
+    return projectArray;
   }
 
   static deleteProject(projectName) {
     const deleteProject = projectArray.findIndex(
       (project) => project.title === projectName,
     );
-    const projects = getProject();
-    projects.splice(deleteProject, 1);
-    setProject(projects);
+    const projects = getProject() || projectArray;
+    if (isArray(projects)) {
+      projects.splice(deleteProject, 1);
+      setProject(projects);
+    }
+    return projects;
   }
 }

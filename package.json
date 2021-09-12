@@ -2,10 +2,19 @@
   "name": "todo-list",
   "version": "1.0.0",
   "description": "Js Project",
-  "private": true,
+  "jest": {
+    "resetMocks": false,
+    "setupFiles": [
+      "./src/modules/constructor.js",
+      "./src/modules/show.js",
+      "./src/modules/localStorage.js",
+      "jest-localstorage-mock"
+    ]
+  },
   "scripts": {
     "dev": "webpack serve",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
+    "test-C": "jest --coverage",
     "build": "webpack"
   },
   "repository": {
@@ -20,10 +29,12 @@
   },
   "homepage": "https://github.com/tanzila-abedin/restaurant-page#readme",
   "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.15.4",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.23.4",
+    "jest": "^27.1.0",
     "stylelint": "^13.13.1",
     "stylelint-config-standard": "^21.0.0",
     "stylelint-csstree-validator": "^1.9.0",
@@ -33,8 +44,8 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
+    "jest-localstorage-mock": "^2.4.17",
     "@fortawesome/fontawesome-free": "^5.15.3",
-    "date-fns": "^2.23.0",
     "lodash": "^4.17.21",
     "serve": "^12.0.0"
   }
